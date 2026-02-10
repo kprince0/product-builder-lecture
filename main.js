@@ -1,6 +1,38 @@
 const generateBtn = document.getElementById('generate-btn');
 const powerballNumbersDiv = document.getElementById('powerball-numbers');
 const powerballNumberDiv = document.getElementById('powerball-number');
+const themeToggle = document.getElementById('checkbox');
+const body = document.body;
+
+// Function to set the theme
+function setTheme(isDarkMode) {
+    if (isDarkMode) {
+        body.classList.add('dark-mode');
+        themeToggle.checked = true;
+    } else {
+        body.classList.remove('dark-mode');
+        themeToggle.checked = false;
+    }
+}
+
+// Load theme from localStorage
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    setTheme(true);
+} else {
+    setTheme(false); // Default to light mode
+}
+
+// Event listener for theme toggle
+themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+        setTheme(true);
+        localStorage.setItem('theme', 'dark');
+    } else {
+        setTheme(false);
+        localStorage.setItem('theme', 'light');
+    }
+});
 
 function generatePowerballNumbers() {
     const whiteBalls = [];
